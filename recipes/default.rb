@@ -1,45 +1,70 @@
-group 'mattsum'
+group node[:mattsum][:group]
 
 chef_gem "ruby-shadow"
 
-user 'mattsum' do
-  group 'mattsum'
+user node[:mattsum][:user] do
+  group node[:mattsum][:group]
   system true
   shell "/bin/bash"
-  home "/home/mattsum"
+  home "/home/#{node[:mattsum][:user]}"
   password "$1$9teDIHue$310PmfM27Dp.1TkLlSstN0"
   supports :manage_home => true
 end
 
 group 'sudo' do
   append true
-  members 'mattsum'
+  members node[:mattsum][:user]
   action :modify
 end
 
-template "/home/mattsum/.bashrc" do
+template "/home/#{node[:mattsum][:user]}/.bashrc" do
   source "bashrc.erb"
   mode 0440
-  owner "mattsum"
-  group "mattsum"
+  owner node[:mattsum][:user]
+  group node[:mattsum][:group]
 end
 
-directory "/home/mattsum/.ssh" do
-  recursive true
-  owner 'mattsum'
-  group 'mattsum'
+%w{bash_aliases
+bash_autoenv
+bash_functions
+bash_paths
+bash_persistant_history
+bash_prompt_setup
+bash_tmux
+bash_tmuxifier
+bash_virtualenv}.each do |file|
+  cookbook_file "/home/#{node[:mattsum][:user]}/.bashrc.d/#{file}" do
+      source file
+      owner node[:mattsum][:user]
+      group node[:mattsum][:group]
+      mode "0777"
+    end
 end
 
-cookbook_file "/home/mattsum/.ssh/authorized_keys" do
+
+cookbook_file "/home/#{node[:mattsum][:user]}/.ssh/authorized_keys" do
   source "authorized_keys"
-  owner 'mattsum'
-  group 'mattsum'
+  owner node[:mattsum][:user]
+  group node[:mattsum][:group]
   mode "0600"
 end
 
-cookbook_file "/home/mattsum/.ssh/authorized_keys2" do
+directory "/home/#{node[:mattsum][:user]}/.ssh" do
+  recursive true
+  owner node[:mattsum][:user]
+  group node[:mattsum][:group]
+end
+
+cookbook_file "/home/#{node[:mattsum][:user]}/.ssh/authorized_keys" do
   source "authorized_keys"
-  owner 'mattsum'
-  group 'mattsum'
+  owner node[:mattsum][:user]
+  group node[:mattsum][:group]
+  mode "0600"
+end
+
+cookbook_file "/home/#{node[:mattsum][:user]}/.ssh/authorized_keys2" do
+  source "authorized_keys"
+  owner node[:mattsum][:user]
+  group node[:mattsum][:group]
   mode "0600"
 end

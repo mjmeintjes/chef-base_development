@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Bash completion
+[[ -s "$HOME/.tmuxifier/init.sh" ]] && source "$HOME/.tmuxifier/init.sh"

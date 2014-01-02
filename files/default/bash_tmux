@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+f(){
+    if [ "$PWD" != "$LPWD" ];then LPWD="$PWD"; tmux rename-window ${PWD//*\//}; fi
+}
+
+save_function old_run_on_prompt_command run_on_prompt_command
+run_on_prompt_command()
+{
+    old_run_on_prompt_command
+    f
+}
