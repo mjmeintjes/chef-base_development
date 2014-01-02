@@ -1,3 +1,7 @@
+group 'mattsum'
+
+chef_gem "ruby-shadow"
+
 user 'mattsum' do
   group 'mattsum'
   system true
