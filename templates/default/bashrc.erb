@@ -5,6 +5,13 @@
 export HISTCONTROL=ignoredups
 export COLORFGBG='default;default'
 
+export CDPATH=.:~:/projects
+
+
+#Using this, consecutive duplicate commands, invocations of ls, executions of the mutt mail client without any additional parameters, plus calls to the bg, fg and exit built-ins will not be appended to the history list.
+export HISTIGNORE="&:ls:ls *:[bf]g:exit"
+
+
 shopt -s checkwinsize
 eval "$(dircolors -b /etc/dircolors)"
 
