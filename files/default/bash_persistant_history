@@ -14,9 +14,4 @@ log_bash_persistent_history()
   fi
 }
 
-save_function run_on_prompt_command old_run_on_prompt_command
-run_on_prompt_command()
-{
-    old_run_on_prompt_command
-    log_bash_persistent_history
-}
+export PROMPT_COMMAND="$PROMPT_COMMAND && log_bash_persistent_history"

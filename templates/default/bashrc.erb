@@ -32,8 +32,6 @@ save_function() {
 
 
 prompt_command() {
-    run_on_prompt_command
-
     # X Terminal titles
     case "$TERM" in
     xterm*|rxvt*|cygwin)
@@ -44,7 +42,7 @@ prompt_command() {
     esac
 }
 
-PROMPT_COMMAND="prompt_command"
+PROMPT_COMMAND="$PROMPT_COMMAND && prompt_command"
 export HISTTIMEFORMAT='%F %T '
 
 mkdir -p ~/.bashrc.d
