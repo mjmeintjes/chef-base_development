@@ -2,7 +2,7 @@ group node[:mattsum][:group]
 
 chef_gem "ruby-shadow"
 include_recipe 'python'
-pip 'autoenv'
+python_pip 'autoenv'
 
 
 user node[:mattsum][:user] do
