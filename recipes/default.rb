@@ -34,9 +34,9 @@ directory "/home/#{node[:mattsum][:user]}/.bashrc.d" do
 end
 
 
-default['authorization']['sudo']['groups'] = [node[:mattsum][:user]]
-default['authorization']['sudo']['users'] = [node[:mattsum][:user]]
-default['authorization']['sudo']['passwordless'] = true
+node.default['authorization']['sudo']['groups'] = [node[:mattsum][:user]]
+node.default['authorization']['sudo']['users'] = [node[:mattsum][:user]]
+node.default['authorization']['sudo']['passwordless'] = true
 
 include_recipe 'sudo'
 
