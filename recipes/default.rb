@@ -1,7 +1,7 @@
 group node[:mattsum][:group]
 
 
-include_recipe 'ssh'
+include_recipe 'openssh'
 
 
 chef_gem "ruby-shadow"
