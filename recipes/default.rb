@@ -51,17 +51,17 @@ bash_virtualenv}.each do |file|
 end
 
 
+directory "/home/#{node[:mattsum][:user]}/.ssh" do
+  recursive true
+  owner node[:mattsum][:user]
+  group node[:mattsum][:group]
+end
+
 cookbook_file "/home/#{node[:mattsum][:user]}/.ssh/authorized_keys" do
   source "authorized_keys"
   owner node[:mattsum][:user]
   group node[:mattsum][:group]
   mode "0600"
-end
-
-directory "/home/#{node[:mattsum][:user]}/.ssh" do
-  recursive true
-  owner node[:mattsum][:user]
-  group node[:mattsum][:group]
 end
 
 cookbook_file "/home/#{node[:mattsum][:user]}/.ssh/authorized_keys" do
