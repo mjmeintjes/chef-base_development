@@ -37,7 +37,7 @@ end
 node.default['authorization']['sudo']['groups'] = [node[:mattsum][:user]]
 node.default['authorization']['sudo']['users'] = [node[:mattsum][:user]]
 node.default['authorization']['sudo']['passwordless'] = true
-
+node.default['authorization']['sudo']['sudoers_defaults'] = ['env_reset']
 include_recipe 'sudo'
 
 
