@@ -33,6 +33,14 @@ directory "/home/#{node[:mattsum][:user]}/.bashrc.d" do
   group node[:mattsum][:group]
 end
 
+
+default['authorization']['sudo']['groups'] = [node[:mattsum][:user]]
+default['authorization']['sudo']['users'] = [node[:mattsum][:user]]
+default['authorization']['sudo']['passwordless'] = true
+
+include_recipe 'sudo'
+
+
 %w{bash_aliases
 bash_autoenv
 bash_functions
