@@ -27,6 +27,12 @@ template "/home/#{node[:mattsum][:user]}/.bashrc" do
   group node[:mattsum][:group]
 end
 
+directory "/home/#{node[:mattsum][:user]}/.bashrc.d" do
+  recursive true
+  owner node[:mattsum][:user]
+  group node[:mattsum][:group]
+end
+
 %w{bash_aliases
 bash_autoenv
 bash_functions
