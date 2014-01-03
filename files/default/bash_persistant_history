@@ -14,7 +14,7 @@ log_bash_persistent_history()
   fi
 }
 
-save_function old_run_on_prompt_command run_on_prompt_command
+save_function run_on_prompt_command old_run_on_prompt_command
 run_on_prompt_command()
 {
     old_run_on_prompt_command
