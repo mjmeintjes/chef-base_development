@@ -10,7 +10,7 @@ user node[:mattsum][:user] do
   system true
   shell "/bin/bash"
   home "/home/#{node[:mattsum][:user]}"
-  password "$1$9teDIHue$310PmfM27Dp.1TkLlSstN0"
+  password "$1$ZFn0NPgS$6yJxqNARbBYYeYPlUMr1s1"
   supports :manage_home => true
 end
 

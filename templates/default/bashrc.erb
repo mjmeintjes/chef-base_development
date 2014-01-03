@@ -41,8 +41,7 @@ prompt_command() {
         ;;
     esac
 }
-
-PROMPT_COMMAND="$PROMPT_COMMAND && prompt_command"
+export PROMPT_COMMAND=prompt_command
 export HISTTIMEFORMAT='%F %T '
 
 mkdir -p ~/.bashrc.d
