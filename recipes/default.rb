@@ -1,5 +1,9 @@
 group node[:mattsum][:group]
 
+
+include_recipe 'ssh'
+
+
 chef_gem "ruby-shadow"
 include_recipe 'python'
 python_pip 'autoenv'
