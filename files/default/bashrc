@@ -1,0 +1,51 @@
+## LoKe's ~/.bashrc
+[ -z "$PS1" ] && return
+
+# Basic options
+export HISTCONTROL=ignoredups
+export COLORFGBG='default;default'
+
+export CDPATH=.:~:/projects
+
+
+#Using this, consecutive duplicate commands, invocations of ls, executions of the mutt mail client without any additional parameters, plus calls to the bg, fg and exit built-ins will not be appended to the history list.
+export HISTIGNORE="&"
+
+
+shopt -s checkwinsize
+eval "$(dircolors -b /etc/dircolors)"
+
+
+# Bash completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Locale and editor
+export EDITOR=vi
+
+save_function() {
+    local ORIG_FUNC=$(declare -f $1)
+    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+    eval "$NEWNAME_FUNC"
+}
+
+
+prompt_command() {
+    # X Terminal titles
+    case "$TERM" in
+    xterm*|rxvt*|cygwin)
+        echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"
+        ;;
+    *)
+        ;;
+    esac
+}
+export PROMPT_COMMAND=prompt_command
+export HISTTIMEFORMAT='%F %T '
+
+mkdir -p ~/.bashrc.d
+touch ~/.bashrc.d/00-default
+for f in ~/.bashrc.d/*; do
+   source $f
+done

@@ -9,6 +9,7 @@ include_recipe 'python'
 python_pip 'autoenv'
 
 
+
 user node[:mattsum][:user] do
   group node[:mattsum][:group]
   system true
@@ -16,6 +17,7 @@ user node[:mattsum][:user] do
   home "/home/#{node[:mattsum][:user]}"
   password "$1$ZFn0NPgS$6yJxqNARbBYYeYPlUMr1s1"
   supports :manage_home => true
+  only_if { node[:mattsum][:create_user] }
 end
 
 group 'sudo' do

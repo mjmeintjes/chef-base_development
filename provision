@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+: ${PROVISION_USER:="vagrant"}
+: ${PROVISION_GROUP:="vagrant"}
+
+useradd -d /home/$PROVISION_USER -m $PROVISION_USER -p $1$ZFn0NPgS$6yJxqNARbBYYeYPlUMr1s1
+usermod -a -G sudo $PROVISION_USER
+
+mkdir -p /home/$PROVISION_USER/bashrc.d
+cp $CURRENT_DIR/files/bashrc /home/$PROVISION_USER/.bashrc
+cp $CURRENT_DIR/files/bash_ /home/$PROVISION_USER/.bashrc.d/
+
+cat $CURRENT_DIR/files/authorized_keys > /home/$PROVISION_USER/.ssh/authorized_keys
+chmod 600 /home/$PROVISION_USER/.ssh/*
+chmod 700 /home/$PROVISION_USER/.ssh
+
+pip install autoenv
