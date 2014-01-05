@@ -6,7 +6,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 : ${PROVISION_USER:="vagrant"}
 : ${PROVISION_GROUP:="vagrant"}
 
-useradd -d /home/$PROVISION_USER -m $PROVISION_USER -p $1$ZFn0NPgS$6yJxqNARbBYYeYPlUMr1s1
+useradd -d /home/$PROVISION_USER -m $PROVISION_USER -p $1$ZFn0NPgS$6yJxqNARbBYYeYPlUMr1s1 || true
 usermod -a -G sudo $PROVISION_USER
 
 mkdir -p /home/$PROVISION_USER/bashrc.d
