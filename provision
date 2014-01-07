@@ -6,21 +6,24 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 : ${PROVISION_USER:="vagrant"}
 : ${PROVISION_GROUP:="vagrant"}
 
-useradd -d /home/$PROVISION_USER -m $PROVISION_USER -p \$1\$ZFn0NPgS\$6yJxqNARbBYYeYPlUMr1s1 || true
+PROVISION_HOME=/home/$PROVISION_USER
+
+useradd -d $PROVISION_HOME -m $PROVISION_USER -p \$1\$ZFn0NPgS\$6yJxqNARbBYYeYPlUMr1s1 || true
 usermod -a -G sudo $PROVISION_USER
 
 
-mkdir -p /home/$PROVISION_USER/.bashrc.d
-cp $CURRENT_DIR/files/default/bashrc /home/$PROVISION_USER/.bashrc
-cp $CURRENT_DIR/files/default/bash_* /home/$PROVISION_USER/.bashrc.d/
+mkdir -p $PROVISION_HOME/.bashrc.d
+cp $CURRENT_DIR/files/default/bashrc $PROVISION_HOME/.bashrc
+cp $CURRENT_DIR/files/default/bash_* $PROVISION_HOME/.bashrc.d/
+cp $CURRENT_DIR/files/default/tmux_conf $PROVISION_HOME/.tmux.conf
 
 PUBLIC_KEY=$(cat  $CURRENT_DIR/files/default/authorized_keys)
-if ! grep -q "${PUBLIC_KEY}" "/home/$PROVISION_USER/.ssh/authorized_keys" ; then
-    cat $CURRENT_DIR/files/default/authorized_keys >> /home/$PROVISION_USER/.ssh/authorized_keys
+if ! grep -q "${PUBLIC_KEY}" "$PROVISION_HOME/.ssh/authorized_keys" ; then
+    cat $CURRENT_DIR/files/default/authorized_keys >> $PROVISION_HOME/.ssh/authorized_keys
 fi
-chmod 600 /home/$PROVISION_USER/.ssh/*
-chmod 700 /home/$PROVISION_USER/.ssh
+chmod 600 $PROVISION_HOME/.ssh/*
+chmod 700 $PROVISION_HOME/.ssh
 
-chown $PROVISION_USER:$PROVISION_GROUP /home/$PROVISION_USER/ -R
+chown $PROVISION_USER:$PROVISION_GROUP $PROVISION_HOME/ -R
 
 pip install autoenv

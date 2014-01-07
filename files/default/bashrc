@@ -13,7 +13,7 @@ export HISTIGNORE="&"
 
 
 shopt -s checkwinsize
-eval "$(dircolors -b /etc/dircolors)"
+#eval "$(dircolors -b /etc/DIR_COLORS)"
 
 
 # Bash completion
