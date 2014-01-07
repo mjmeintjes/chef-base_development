@@ -14,7 +14,7 @@ mkdir -p /home/$PROVISION_USER/.bashrc.d
 cp $CURRENT_DIR/files/default/bashrc /home/$PROVISION_USER/.bashrc
 cp $CURRENT_DIR/files/default/bash_* /home/$PROVISION_USER/.bashrc.d/
 
-PUBLIC_KEY=$(cat  $CURRENT_DIR/files/default/authorized_keys))
+PUBLIC_KEY=$(cat  $CURRENT_DIR/files/default/authorized_keys)
 if ! grep -q "${PUBLIC_KEY}" "/home/$PROVISION_USER/.ssh/authorized_keys" ; then
     cat $CURRENT_DIR/files/default/authorized_keys >> /home/$PROVISION_USER/.ssh/authorized_keys
 fi
